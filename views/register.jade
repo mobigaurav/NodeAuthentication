@@ -1,0 +1,45 @@
+extends layout
+
+block content
+  h2.page-header Register
+  if errors
+   each error,i in errors
+    div.alert.alert-danger #{error.msg}
+  form(method='POST', action='/users/register', enctype='multipart/form-data')
+    .form-group
+      label(for='exampleInputEmail1') Email address
+      |     
+      input#exampleInputEmail1.form-control(type='email', placeholder='Email',name='email')
+    |   
+    .form-group
+      label(for='exampleInputname') UserName
+      |     
+      input#exampleInputname.form-control(type='text', placeholder='Name',name='username')
+    |   
+    .form-group
+      label(for='exampleInputaddress') Address
+      |     
+      input#exampleInputaddress.form-control(type='text', placeholder='Address',name='address')
+    |   
+    .form-group
+      label(for='exampleInputnumber') Phone Number:
+      |     
+      input#exampleInputnumber.form-control(type='number', placeholder='phonenumber',name='phonenumber')
+    |   
+    .form-group
+      label(for='exampleInputPassword1') Password
+      |     
+      input#exampleInputPassword1.form-control(type='password', placeholder='Password',name='password1')
+    |    
+    .form-group
+      label(for='exampleInputPassword2') Confirm Password
+      |     
+      input#exampleInputPassword2.form-control(type='password', placeholder='Password',name='password2')
+    |   
+    .form-group
+      label(for='exampleInputFile') File input
+      |     
+      input#exampleInputFile(type='file',name='profileimage')
+    |   
+    button.btn.btn-default(type='submit') Register
+  

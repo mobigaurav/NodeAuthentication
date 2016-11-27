@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  form(method='POST', action='/users/login')
+    .form-group
+      label(for='exampleInputEmail1') Email address
+      |     
+      input#exampleInputEmail1.form-control(type='email', placeholder='Email',name='username')
+    
+    |   
+    .form-group
+      label(for='exampleInputPassword1') Password
+      |     
+      input#exampleInputPassword1.form-control(type='password', placeholder='Password',name='password')
+    
+    |   
+    button.btn.btn-default(type='submit') Login
+   

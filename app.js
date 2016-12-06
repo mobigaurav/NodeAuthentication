@@ -1,3 +1,28 @@
+var cluster = require('cluster');
+// Code to run if we're in the master process
+if (cluster.isMaster) {
+
+    // Count the machine's CPUs
+    var cpuCount = require('os').cpus().length;
+
+    // Create a worker for each CPU
+    for (var i = 0; i < cpuCount; i += 1) {
+        cluster.fork();
+    }
+
+    // Listen for terminating workers
+    cluster.on('exit', function (worker) {
+
+        // Replace the terminated workers
+        console.log('Worker ' + worker.id + ' died :(');
+        cluster.fork();
+
+    });
+
+// Code to run if we're in a worker process
+}
+
+else {
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -18,6 +43,8 @@ var mongoose = require('mongoose');
 var db = mongoose.connection;
 var index = require('./routes/index');
 var users = require('./routes/users');
+ 
+
 
 var app = express();
 
@@ -102,3 +129,4 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+  }
